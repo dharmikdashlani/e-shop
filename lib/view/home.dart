@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:untitled/DB/productdb.dart';
 import 'package:untitled/view/auth.dart';
+import 'package:http/http.dart' as http;
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -117,7 +121,21 @@ class _HomeState extends State<Home> {
                       ],
                     ),
                   ),
-                )
+                ),
+                FutureBuilder(future: ProductDb().GetData()
+                ,builder: (context, snapshot) {
+                  if(snapshot.hasError)
+                    {
+                      return Center(child: Text(snapshot.error.toString()),);
+                    }
+                  if(snapshot.hasData)
+                    {
+                      List? data = snapshot.data;
+                       return Center(child: Text("${data![0]['product_id']}"),);
+                    }
+
+                  return Center(child: CircularProgressIndicator(),);
+                },),
               ],
             ),
           ),

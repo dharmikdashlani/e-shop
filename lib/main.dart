@@ -17,7 +17,7 @@ void main() async {
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: 'splesh',
+      initialRoute: 'bottom',
       routes: {
         'splesh': (context) => splesh(),
         'auth': (contexy) => email == null ?Auth() : Home(),
